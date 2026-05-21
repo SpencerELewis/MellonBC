@@ -6,7 +6,6 @@ export interface Book {
   startDate: string; // YYYY-MM-DD
   endDate: string;   // YYYY-MM-DD
   description: string;
-  notes: string;
 }
 
 export interface BookClubData {

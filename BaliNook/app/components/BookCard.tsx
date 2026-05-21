@@ -95,13 +95,6 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
             {book.description}
           </p>
         )}
-
-        {book.notes && (
-          <div className="mt-3 bg-amber-100 rounded-md px-3 py-2">
-            <p className="text-xs font-semibold text-amber-800 mb-0.5">Club Notes</p>
-            <p className="text-sm text-amber-900">{book.notes}</p>
-          </div>
-        )}
       </div>
     </div>
   );

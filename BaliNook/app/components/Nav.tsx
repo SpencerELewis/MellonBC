@@ -7,29 +7,6 @@ export function Nav() {
         <NavLink to="/" className="text-lg font-bold tracking-wide hover:text-amber-200 transition-colors">
           📚 BaliNook Book Club
         </NavLink>
-        <div className="flex gap-6 text-sm font-medium">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              isActive
-                ? "text-amber-200 border-b-2 border-amber-200 pb-0.5"
-                : "hover:text-amber-200 transition-colors"
-            }
-          >
-            Current
-          </NavLink>
-          <NavLink
-            to="/history"
-            className={({ isActive }) =>
-              isActive
-                ? "text-amber-200 border-b-2 border-amber-200 pb-0.5"
-                : "hover:text-amber-200 transition-colors"
-            }
-          >
-            History
-          </NavLink>
-        </div>
       </div>
     </nav>
   );

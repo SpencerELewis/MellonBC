@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { BookCard } from "~/components/BookCard";
 import { Calendar } from "~/components/Calendar";
 import { bookClubData } from "~/data/bookclub-data";
@@ -10,6 +11,7 @@ export function meta() {
 }
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState<"books" | "calendar">("books");
   const data = bookClubData;
   const today = new Date().toISOString().slice(0, 10);
   const currentBook = data.books.find((b) => b.id === data.currentBookId) ?? null;
@@ -18,48 +20,82 @@ export default function Home() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
-      {currentBook ? (
-        <section>
-          <BookCard book={currentBook} isCurrent />
-        </section>
-      ) : (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-8 text-center text-amber-700">
-          <p className="text-4xl mb-3">📚</p>
-          <p className="font-semibold">No current book selected</p>
-          <p className="text-sm mt-1">Set currentBookId in app/data/bookclub-data.ts.</p>
-        </div>
-      )}
-
-      {upcomingBooks.length > 0 && (
-        <section>
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
-            Coming Up
-          </h2>
-          <div className="space-y-4">
-            {upcomingBooks.map((b) => (
-              <BookCard key={b.id} book={b} />
-            ))}
-          </div>
-        </section>
-      )}
-
-      <section>
-        <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
-          Reading Schedule
-        </h2>
-        <Calendar books={data.books} />
+      <section className="bg-white rounded-xl border border-gray-200 p-2 inline-flex gap-2">
+        <button
+          type="button"
+          onClick={() => setActiveTab("books")}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            activeTab === "books"
+              ? "bg-amber-800 text-white"
+              : "text-gray-600 hover:bg-gray-100"
+          }`}
+        >
+          Books
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("calendar")}
+          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            activeTab === "calendar"
+              ? "bg-amber-800 text-white"
+              : "text-gray-600 hover:bg-gray-100"
+          }`}
+        >
+          Calendar
+        </button>
       </section>
 
-      {pastBooks.length > 0 && (
+      {activeTab === "books" && (
+        <>
+          {currentBook ? (
+            <section>
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                Current Book
+              </h2>
+              <BookCard book={currentBook} isCurrent />
+            </section>
+          ) : (
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-8 text-center text-amber-700">
+              <p className="text-4xl mb-3">📚</p>
+              <p className="font-semibold">No current book selected</p>
+              <p className="text-sm mt-1">Set currentBookId in app/data/bookclub-data.ts.</p>
+            </div>
+          )}
+
+          {upcomingBooks.length > 0 && (
+            <section>
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                Coming Up
+              </h2>
+              <div className="space-y-4">
+                {upcomingBooks.map((b) => (
+                  <BookCard key={b.id} book={b} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          {pastBooks.length > 0 && (
+            <section>
+              <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+                History
+              </h2>
+              <div className="space-y-4">
+                {[...pastBooks].reverse().slice(0, 3).map((b) => (
+                  <BookCard key={b.id} book={b} />
+                ))}
+              </div>
+            </section>
+          )}
+        </>
+      )}
+
+      {activeTab === "calendar" && (
         <section>
           <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
-            Recent Books
+            Reading Schedule
           </h2>
-          <div className="space-y-4">
-            {[...pastBooks].reverse().slice(0, 3).map((b) => (
-              <BookCard key={b.id} book={b} />
-            ))}
-          </div>
+          <Calendar books={data.books} />
         </section>
       )}
     </div>

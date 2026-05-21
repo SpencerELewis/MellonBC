@@ -33,111 +33,100 @@ function getBookColor(book: Book, allBooks: Book[]): string {
   return BOOK_COLORS[idx % BOOK_COLORS.length] ?? BOOK_COLORS[0];
 }
 
-export function Calendar({ books }: CalendarProps) {
-  const today = new Date();
-  const [year, setYear] = useState(today.getFullYear());
-  const [month, setMonth] = useState(today.getMonth());
-  const [tooltip, setTooltip] = useState<{ text: string; day: number } | null>(null);
-
+function buildMonthCells(year: number, month: number): Array<{ day: number | null }> {
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const todayStr = dateStr(today.getFullYear(), today.getMonth(), today.getDate());
-
-  function prevMonth() {
-    if (month === 0) { setMonth(11); setYear((y) => y - 1); }
-    else setMonth((m) => m - 1);
-  }
-  function nextMonth() {
-    if (month === 11) { setMonth(0); setYear((y) => y + 1); }
-    else setMonth((m) => m + 1);
-  }
-
-  // Build grid: leading empty cells + day cells
   const cells: Array<{ day: number | null }> = [];
+
   for (let i = 0; i < firstDay; i++) cells.push({ day: null });
   for (let d = 1; d <= daysInMonth; d++) cells.push({ day: d });
 
+  return cells;
+}
+
+export function Calendar({ books }: CalendarProps) {
+  const today = new Date();
+  const [year, setYear] = useState(today.getFullYear());
+  const [tooltipDate, setTooltipDate] = useState<string | null>(null);
+  const todayStr = dateStr(today.getFullYear(), today.getMonth(), today.getDate());
+
   return (
     <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
-      {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <button
-          onClick={prevMonth}
+          onClick={() => setYear((y) => y - 1)}
           className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
-          aria-label="Previous month"
+          aria-label="Previous year"
         >
           ‹
         </button>
-        <h3 className="font-semibold text-gray-800">
-          {MONTHS[month]} {year}
-        </h3>
+        <h3 className="font-semibold text-gray-800">Reading Year: {year}</h3>
         <button
-          onClick={nextMonth}
+          onClick={() => setYear((y) => y + 1)}
           className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
-          aria-label="Next month"
+          aria-label="Next year"
         >
           ›
         </button>
       </div>
 
-      {/* Day labels */}
-      <div className="grid grid-cols-7 mb-1">
-        {DAYS.map((d) => (
-          <div key={d} className="text-center text-xs font-medium text-gray-400 py-1">
-            {d}
-          </div>
-        ))}
-      </div>
-
-      {/* Day cells */}
-      <div className="grid grid-cols-7 gap-0.5">
-        {cells.map((cell, i) => {
-          if (!cell.day) return <div key={`empty-${i}`} />;
-          const ds = dateStr(year, month, cell.day);
-          const dayBooks = getBooksForDate(ds, books);
-          const isToday = ds === todayStr;
+      <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        {MONTHS.map((monthName, monthIdx) => {
+          const cells = buildMonthCells(year, monthIdx);
 
           return (
-            <div
-              key={ds}
-              className={`relative text-center rounded-md py-1 text-sm cursor-default
-                ${dayBooks.length > 0 ? getBookColor(dayBooks[0], books) : "text-gray-700"}
-                ${isToday ? "ring-2 ring-amber-600 ring-offset-1 font-bold" : ""}
-              `}
-              onMouseEnter={() => {
-                if (dayBooks.length > 0) {
-                  setTooltip({ text: dayBooks.map((b) => b.title).join(", "), day: cell.day! });
-                }
-              }}
-              onMouseLeave={() => setTooltip(null)}
-            >
-              {cell.day}
-              {tooltip?.day === cell.day && dayBooks.length > 0 && (
-                <div className="absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-1 bg-gray-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap pointer-events-none shadow-lg">
-                  {tooltip.text}
-                </div>
-              )}
-            </div>
+            <section key={`${year}-${monthIdx}`} className="rounded-lg border border-gray-200 p-3">
+              <h4 className="text-sm font-semibold text-gray-700 mb-2">{monthName}</h4>
+
+              <div className="grid grid-cols-7 mb-1">
+                {DAYS.map((d) => (
+                  <div key={`${monthName}-${d}`} className="text-center text-[10px] font-medium text-gray-400 py-1">
+                    {d}
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-7 gap-0.5">
+                {cells.map((cell, i) => {
+                  if (!cell.day) return <div key={`${monthName}-empty-${i}`} className="h-6" />;
+
+                  const ds = dateStr(year, monthIdx, cell.day);
+                  const dayBooks = getBooksForDate(ds, books);
+                  const isToday = ds === todayStr;
+                  const hasBook = dayBooks.length > 0;
+
+                  return (
+                    <div
+                      key={ds}
+                      className={`relative h-6 text-center rounded-md text-xs leading-6 cursor-default
+                        ${hasBook ? getBookColor(dayBooks[0], books) : "text-gray-700"}
+                        ${isToday ? "ring-2 ring-amber-600 ring-offset-1 font-bold" : ""}
+                      `}
+                      onMouseEnter={() => {
+                        if (hasBook) {
+                          setTooltipDate(ds);
+                        }
+                      }}
+                      onMouseLeave={() => setTooltipDate(null)}
+                    >
+                      {cell.day}
+                      {tooltipDate === ds && hasBook && (
+                        <div className="absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-1 bg-gray-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap pointer-events-none shadow-lg">
+                          {dayBooks.map((b) => b.title).join(", ")}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
           );
         })}
       </div>
 
-      {/* Legend */}
-      {books.length > 0 && (
-        <div className="mt-4 flex flex-wrap gap-2">
-          {books.map((book, idx) => (
-            <div key={book.id} className="flex items-center gap-1.5 text-xs text-gray-600">
-              <span
-                className={`w-3 h-3 rounded-sm ${BOOK_COLORS[idx % BOOK_COLORS.length]?.split(" ")[0] ?? "bg-amber-200"}`}
-              />
-              <span>{book.title}</span>
-              <span className="text-gray-400">
-                ({book.startDate} – {book.endDate})
-              </span>
-            </div>
-          ))}
-        </div>
-      )}
+      <p className="text-xs text-gray-400 mt-3">
+        Only dates that fall within a book period are color-filled.
+      </p>
     </div>
   );
 }

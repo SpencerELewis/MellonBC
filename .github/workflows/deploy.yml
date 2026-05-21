@@ -1,0 +1,58 @@
+name: Deploy BaliNook to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: BaliNook/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: BaliNook
+
+      - name: Build
+        run: npm run build
+        working-directory: BaliNook
+        env:
+          # Set VITE_BASE_PATH to the repo subdirectory if deploying to
+          # username.github.io/REPO_NAME/ — e.g. /MellonBC/
+          # Leave empty (or remove) when using a custom domain or user pages root.
+          VITE_BASE_PATH: ${{ vars.VITE_BASE_PATH }}
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: BaliNook/build/client
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deploy
+        uses: actions/deploy-pages@v4

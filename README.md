@@ -1,11 +1,11 @@
 # MellonBC
 
-Book club tracker for planning reading periods, viewing history, and sharing updates through GitHub-hosted JSON data.
+Book club tracker for planning reading periods and viewing history with a static data file.
 
 ## Project Structure
 
 - `BaliNook/` - React app (frontend only)
-- `data/bookclub.json` - Shared book club data file
+- `BaliNook/app/data/bookclub-data.ts` - Single source of book data
 - `.github/workflows/deploy.yml` - GitHub Pages deployment workflow
 
 ## Main App

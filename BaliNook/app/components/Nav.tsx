@@ -29,16 +29,6 @@ export function Nav() {
           >
             History
           </NavLink>
-          <NavLink
-            to="/admin"
-            className={({ isActive }) =>
-              isActive
-                ? "text-amber-200 border-b-2 border-amber-200 pb-0.5"
-                : "hover:text-amber-200 transition-colors"
-            }
-          >
-            Admin
-          </NavLink>
         </div>
       </div>
     </nav>

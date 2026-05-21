@@ -13,14 +13,3 @@ export interface BookClubData {
   currentBookId: string | null;
   books: Book[];
 }
-
-export interface GitHubFileResponse {
-  content: string;
-  sha: string;
-  encoding: string;
-}
-
-export interface RepoConfig {
-  owner: string;
-  repo: string;
-}

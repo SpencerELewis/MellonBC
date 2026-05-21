@@ -2,7 +2,7 @@
 
 Frontend-only book club tracker built with React Router + Vite.
 
-The app is fully static. All content is edited in one file:
+The app is now fully static. All book data is controlled in one local file:
 
 - `app/data/bookclub-data.ts`
 
@@ -42,16 +42,16 @@ npm run build
 
 ## Updating Book Data
 
-Edit this file:
+Edit only this file:
 
 - `app/data/bookclub-data.ts`
 
-Update these fields:
+Set:
 
-- `currentBookId` to the book id currently being read
-- `books` to add, remove, or edit entries
+- `currentBookId` to the `id` of the active book
+- `books` array to add/remove/update books
 
-Then commit and push.
+Then commit and push changes.
 
 ## Deployment (GitHub Pages)
 
@@ -70,7 +70,7 @@ This repo includes a workflow at `.github/workflows/deploy.yml` that deploys the
 
 ## Data File Format
 
-The app expects this structure in `app/data/bookclub-data.ts`:
+The app expects this structure inside `app/data/bookclub-data.ts`:
 
 Shape:
 

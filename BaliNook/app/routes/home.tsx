@@ -62,7 +62,7 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 pt-20 pb-12 space-y-20 bg-amber-50/70 rounded-3xl ring-1 ring-amber-100">
+    <div className="max-w-4xl mx-auto px-6 pt-20 pb-20 space-y-20 bg-amber-50/70 rounded-3xl ring-1 ring-amber-100">
       <section>
         <h1 className="text-4xl md:text-5xl font-bold text-amber-900">Welcome to BaliNook</h1>
         <p className="mt-5 text-lg md:text-xl text-amber-800/90 max-w-3xl leading-relaxed">

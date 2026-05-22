@@ -9,10 +9,15 @@ export function Nav() {
     : isCalendar
     ? "bg-emerald-300"
     : "bg-amber-300";
+  const navWaveThemeClass = isBooks
+    ? "nav-wave-books"
+    : isCalendar
+    ? "nav-wave-calendar"
+    : "nav-wave-home";
 
   return (
-    <nav className={`${navThemeClass} text-slate-800 shadow-sm border-b border-white/60`}>
-      <div className="max-w-5xl mx-auto px-4 flex items-center justify-between h-14">
+    <nav className={`nav-wave-pattern ${navWaveThemeClass} ${navThemeClass} text-slate-800 shadow-sm border-b border-white/60`}>
+      <div className="relative z-10 max-w-5xl mx-auto px-4 flex items-center justify-between h-14">
         <NavLink to="/" className="text-2xl font-bold tracking-wide hover:text-slate-900 transition-colors">
             BaliNook
         </NavLink>

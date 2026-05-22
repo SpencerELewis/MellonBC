@@ -19,25 +19,34 @@ export function meta() {
 
 export default function Home() {
   const covers = bookClubData.books.filter((book) => Boolean(book.path));
+  const MIN_MARQUEE_RATE = 0.08;
   const MARQUEE_REPEAT = 12;
   const marqueeTrackRef = useRef<HTMLDivElement | null>(null);
   const rateRef = useRef(1);
+  const targetRateRef = useRef(1);
   const rafRef = useRef<number | null>(null);
   const marqueeCovers = Array.from({ length: covers.length * MARQUEE_REPEAT }, (_, index) => {
     return covers[index % covers.length];
   });
 
   function setTrackRate(value: number) {
+    const clamped = Math.max(MIN_MARQUEE_RATE, Math.min(1, value));
     const track = marqueeTrackRef.current;
     if (!track) return;
     const animations = track.getAnimations();
     for (const animation of animations) {
-      animation.playbackRate = value;
+      animation.playbackRate = clamped;
     }
-    rateRef.current = value;
+    rateRef.current = clamped;
   }
 
-  function tweenTrackRate(target: number) {
+  function tweenTrackRate(nextTarget: number) {
+    const target = Math.max(MIN_MARQUEE_RATE, Math.min(1, nextTarget));
+    if (Math.abs(targetRateRef.current - target) < 0.001) {
+      return;
+    }
+    targetRateRef.current = target;
+
     const startRate = rateRef.current;
     const durationMs = 650;
     const startTime = performance.now();
@@ -80,8 +89,8 @@ export default function Home() {
             <div
               className="cover-marquee cover-marquee-bleed"
               aria-label="Scrolling book covers"
-              onMouseEnter={() => tweenTrackRate(0)}
-              onMouseLeave={() => tweenTrackRate(1)}
+              onPointerEnter={() => tweenTrackRate(MIN_MARQUEE_RATE)}
+              onPointerLeave={() => tweenTrackRate(1)}
             >
               <div
                 ref={marqueeTrackRef}

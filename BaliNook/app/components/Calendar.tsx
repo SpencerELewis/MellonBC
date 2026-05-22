@@ -25,11 +25,11 @@ function getBooksForDate(date: string, books: Book[]): Book[] {
 
 // Returns a CSS color class based on book index in a stable way
 const BOOK_COLORS = [
-  "bg-amber-200 text-amber-900",
   "bg-emerald-200 text-emerald-900",
-  "bg-sky-200 text-sky-900",
-  "bg-violet-200 text-violet-900",
-  "bg-rose-200 text-rose-900",
+  "bg-emerald-200 text-emerald-900",
+  "bg-emerald-200 text-emerald-900",
+  "bg-emerald-200 text-emerald-900",
+  "bg-emerald-200 text-emerald-900",
 ];
 
 function getBookColor(book: Book, allBooks: Book[]): string {
@@ -54,19 +54,19 @@ export function Calendar({ books }: CalendarProps) {
   const todayStr = dateStr(today.getFullYear(), today.getMonth(), today.getDate());
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-4">
+    <div className="bg-white rounded-xl border border-emerald-200 shadow-sm p-4">
       <div className="flex items-center justify-between mb-4">
         <button
           onClick={() => setYear((y) => y - 1)}
-          className="h-10 w-10 text-2xl leading-none rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
+          className="h-10 w-10 text-2xl leading-none rounded-lg hover:bg-emerald-100 text-emerald-700 hover:text-emerald-900 transition-colors"
           aria-label="Previous year"
         >
           ‹
         </button>
-        <h3 className="font-semibold text-gray-800">Reading Year: {year}</h3>
+        <h3 className="font-semibold text-emerald-900">Reading Year: {year}</h3>
         <button
           onClick={() => setYear((y) => y + 1)}
-          className="h-10 w-10 text-2xl leading-none rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
+          className="h-10 w-10 text-2xl leading-none rounded-lg hover:bg-emerald-100 text-emerald-700 hover:text-emerald-900 transition-colors"
           aria-label="Next year"
         >
           ›
@@ -79,13 +79,23 @@ export function Calendar({ books }: CalendarProps) {
           const monthStart = dateToStr(new Date(year, monthIdx, 1));
           const monthEnd = dateToStr(new Date(year, monthIdx + 1, 0));
           const monthBooks = books.filter((b) => b.startDate <= monthEnd && b.endDate >= monthStart);
+          const isCurrentMonth = year === today.getFullYear() && monthIdx === today.getMonth();
 
           return (
-            <section key={`${year}-${monthIdx}`} className="rounded-lg border border-gray-200 p-3">
+            <section
+              key={`${year}-${monthIdx}`}
+              className={`rounded-lg border p-3 ${
+                isCurrentMonth
+                  ? "border-emerald-500 ring-2 ring-emerald-300 bg-emerald-50/60"
+                  : "border-emerald-100"
+              }`}
+            >
               <div className="mb-2 flex items-center justify-between gap-2">
-                <h4 className="text-sm font-semibold text-gray-700">{monthName}</h4>
+                <h4 className={`text-sm ${isCurrentMonth ? "font-bold text-emerald-900" : "font-semibold text-emerald-800"}`}>
+                  {monthName}
+                </h4>
                 {monthBooks.length > 0 && (
-                  <div className="max-w-[70%] rounded border border-gray-300 bg-gray-50 px-2 py-0.5 text-[10px] text-gray-700">
+                  <div className="max-w-[70%] rounded border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] text-emerald-800">
                     {monthBooks.map((b) => b.title).join(", ")}
                   </div>
                 )}
@@ -93,7 +103,7 @@ export function Calendar({ books }: CalendarProps) {
 
               <div className="grid grid-cols-7 mb-1">
                 {DAYS.map((d) => (
-                  <div key={`${monthName}-${d}`} className="text-center text-[10px] font-medium text-gray-400 py-1">
+                  <div key={`${monthName}-${d}`} className="text-center text-[10px] font-medium text-emerald-600/60 py-1">
                     {d}
                   </div>
                 ))}
@@ -113,7 +123,7 @@ export function Calendar({ books }: CalendarProps) {
                       key={ds}
                       className={`relative h-6 text-center rounded-md text-xs leading-6 cursor-default
                         ${hasBook ? getBookColor(dayBooks[0], books) : "text-gray-700"}
-                        ${isToday ? "ring-2 ring-amber-600 ring-offset-1 font-bold" : ""}
+                        ${isToday ? "ring-2 ring-emerald-700 ring-offset-1 font-bold" : ""}
                       `}
                     >
                       {cell.day}
@@ -126,7 +136,7 @@ export function Calendar({ books }: CalendarProps) {
         })}
       </div>
 
-      <p className="text-xs text-gray-400 mt-3">
+      <p className="text-xs text-emerald-700/65 mt-3">
         Only dates that fall within a book period are color-filled.
       </p>
     </div>

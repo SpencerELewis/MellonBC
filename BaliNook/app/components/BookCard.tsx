@@ -37,7 +37,7 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
     <div
       className={`rounded-xl border ${
         isCurrent
-          ? "border-amber-300 bg-amber-50 shadow-lg"
+          ? "border-sky-300 bg-sky-50 shadow-lg"
           : "border-gray-200 bg-white shadow-sm"
       } p-9 md:p-10 flex gap-7`}
     >
@@ -50,7 +50,7 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
             className="w-32 h-52 md:w-36 md:h-56 object-cover rounded-md shadow"
           />
         ) : (
-          <div className="w-32 h-52 md:w-36 md:h-56 rounded-md bg-amber-200 flex items-center justify-center text-4xl shadow">
+          <div className="w-32 h-52 md:w-36 md:h-56 rounded-md bg-sky-200 flex items-center justify-center text-4xl shadow">
             📖
           </div>
         )}
@@ -59,13 +59,13 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
       {/* Info */}
       <div className="flex-1 min-w-0 space-y-1">
         {isCurrent && (
-          <span className="inline-block text-xs font-semibold uppercase tracking-wider bg-amber-800 text-amber-50 px-2 py-0.5 rounded mb-2">
+          <span className="inline-block text-xs font-semibold uppercase tracking-wider bg-sky-800 text-sky-50 px-2 py-0.5 rounded mb-2">
             Currently Reading
           </span>
         )}
         <h2 className="text-2xl font-bold text-gray-900 leading-tight">{book.title}</h2>
         <p className="text-gray-500 text-base mt-1">by {book.author}</p>
-        <p className="text-amber-700 text-base mt-3 font-medium">
+        <p className="text-sky-700 text-base mt-3 font-medium">
           {formatDateRange(book.startDate, book.endDate)}
         </p>
 
@@ -81,9 +81,9 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
                   : "Period ended"}
               </span>
             </div>
-            <div className="h-2 bg-amber-100 rounded-full overflow-hidden">
+            <div className="h-2 bg-sky-100 rounded-full overflow-hidden">
               <div
-                className="h-full bg-amber-600 rounded-full transition-all"
+                className="h-full bg-sky-600 rounded-full transition-all"
                 style={{ width: `${progress}%` }}
               />
             </div>

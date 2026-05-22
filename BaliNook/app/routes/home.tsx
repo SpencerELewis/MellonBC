@@ -62,16 +62,16 @@ export default function Home() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 pt-20 pb-12 space-y-20">
+    <div className="max-w-4xl mx-auto px-6 pt-20 pb-12 space-y-20 bg-amber-50/70 rounded-3xl ring-1 ring-amber-100">
       <section>
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900">Welcome to BaliNook</h1>
-        <p className="mt-5 text-lg md:text-xl text-gray-700 max-w-3xl leading-relaxed">
+        <h1 className="text-4xl md:text-5xl font-bold text-amber-900">Welcome to BaliNook</h1>
+        <p className="mt-5 text-lg md:text-xl text-amber-800/90 max-w-3xl leading-relaxed">
           Keep up with what we are reading, what is coming next, and when each title runs.
           Use the navigation above to jump to the Books and Calendar pages.
         </p>
       </section>
 
-      <hr className="border-gray-200" />
+      <hr className="border-amber-200" />
 
       {covers.length > 0 && (
         <>
@@ -105,33 +105,33 @@ export default function Home() {
             </div>
           </section>
 
-          <hr className="border-gray-200" />
+          <hr className="border-amber-200" />
         </>
       )}
 
       <section>
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">Next Meeting</h2>
-        <p className="mt-3 text-lg md:text-xl text-gray-700">{NEXT_MEETING.agenda}</p>
-        <div className="mt-3 space-y-1 text-base md:text-lg text-gray-600">
+        <h2 className="text-2xl md:text-3xl font-semibold text-amber-900">Next Meeting</h2>
+        <p className="mt-3 text-lg md:text-xl text-amber-800/90">{NEXT_MEETING.agenda}</p>
+        <div className="mt-3 space-y-1 text-base md:text-lg text-amber-900/75">
           <p>Date: {NEXT_MEETING.date}</p>
           <p>Time: {NEXT_MEETING.time}</p>
           <p>Location: {NEXT_MEETING.location}</p>
         </div>
         <div className="mt-5 flex flex-wrap gap-4 text-base md:text-lg font-medium">
-          <Link to="/calendar" className="text-amber-800 hover:text-amber-700 underline underline-offset-4">
+          <Link to="/calendar" className="text-amber-900 hover:text-amber-700 underline underline-offset-4">
             View Reading Calendar
           </Link>
-          <Link to="/books" className="text-amber-800 hover:text-amber-700 underline underline-offset-4">
+          <Link to="/books" className="text-amber-900 hover:text-amber-700 underline underline-offset-4">
             Browse Books
           </Link>
         </div>
       </section>
 
-      <hr className="border-gray-200" />
+      <hr className="border-amber-200" />
 
       <section>
-        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">Famous Quotes</h2>
-        <p className="mt-3 text-lg md:text-xl text-gray-600">To be updated...</p>
+        <h2 className="text-2xl md:text-3xl font-semibold text-amber-900">Famous Quotes</h2>
+        <p className="mt-3 text-lg md:text-xl text-amber-900/70">To be updated...</p>
       </section>
     </div>
   );

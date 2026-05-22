@@ -39,10 +39,10 @@ export default function BooksPage() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <div className="max-w-5xl mx-auto px-6 py-8 space-y-8 bg-sky-50/70 rounded-3xl ring-1 ring-sky-100">
       {currentBook ? (
         <section>
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-sky-700/70 mb-3">
             Current Book
           </h2>
           <div id={currentBook.id} className={getCardAnchorClass(currentBook.id)}>
@@ -50,7 +50,7 @@ export default function BooksPage() {
           </div>
         </section>
       ) : (
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-8 text-center text-amber-700">
+        <div className="bg-sky-100 border border-sky-200 rounded-xl p-8 text-center text-sky-800">
           <p className="text-4xl mb-3">📚</p>
           <p className="font-semibold">No current book selected</p>
           <p className="text-sm mt-1">Set currentBookId in app/data/bookclub-data.ts.</p>
@@ -59,7 +59,7 @@ export default function BooksPage() {
 
       {upcomingBooks.length > 0 && (
         <section>
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-sky-700/70 mb-3">
             Coming Up
           </h2>
           <div className="space-y-4">
@@ -74,7 +74,7 @@ export default function BooksPage() {
 
       {pastBooks.length > 0 && (
         <section>
-          <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-sky-700/70 mb-3">
             History
           </h2>
           <div className="space-y-4">

@@ -12,6 +12,8 @@ body {
 
 .cover-marquee {
   overflow: hidden;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
   width: 100%;
 }
 
@@ -30,10 +32,6 @@ body {
   display: flex;
   gap: 2rem;
   width: max-content;
-}
-
-.cover-marquee:hover .cover-marquee-track {
-  animation-play-state: paused;
 }
 
 @keyframes cover-scroll {

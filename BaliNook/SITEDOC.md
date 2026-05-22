@@ -82,7 +82,7 @@ export const bookClubData = {
       id: "book-1",
       title: "Book Title",
       author: "Author Name",
-      coverUrl: "",
+      path: "",
       startDate: "2026-05-01",
       endDate: "2026-05-31",
       description: "",

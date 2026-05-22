@@ -43,9 +43,9 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
     >
       {/* Cover */}
       <div className="flex-shrink-0">
-        {book.coverUrl ? (
+        {book.path ? (
           <img
-            src={book.coverUrl}
+            src={book.path}
             alt={`Cover of ${book.title}`}
             className="w-28 h-40 object-cover rounded-md shadow"
           />

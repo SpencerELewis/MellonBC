@@ -40,12 +40,18 @@ export default function Home() {
               style={{ "--marquee-shift": `${100 / MARQUEE_REPEAT}%` } as React.CSSProperties}
             >
               {marqueeCovers.map((book, index) => (
-                <img
+                <Link
                   key={`${book.id}-${index}`}
-                  src={book.path}
-                  alt={`Cover of ${book.title}`}
-                  className="h-52 w-36 md:h-64 md:w-44 object-cover rounded-md shadow-md shadow-black/20"
-                />
+                  to={`/books#${book.id}`}
+                  className="block relative transition-transform duration-300 ease-out hover:scale-110 focus-visible:scale-110 focus-visible:outline-none"
+                  aria-label={`Open ${book.title} in Books`}
+                >
+                  <img
+                    src={book.path}
+                    alt={`Cover of ${book.title}`}
+                    className="h-60 w-40 md:h-72 md:w-48 object-cover rounded-md"
+                  />
+                </Link>
               ))}
             </div>
           </div>

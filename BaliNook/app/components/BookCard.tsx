@@ -39,7 +39,7 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
         isCurrent
           ? "border-amber-300 bg-amber-50 shadow-lg"
           : "border-gray-200 bg-white shadow-sm"
-      } p-6 flex gap-6`}
+      } p-9 md:p-10 flex gap-7`}
     >
       {/* Cover */}
       <div className="flex-shrink-0">
@@ -47,25 +47,25 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
           <img
             src={book.path}
             alt={`Cover of ${book.title}`}
-            className="w-28 h-40 object-cover rounded-md shadow"
+            className="w-32 h-52 md:w-36 md:h-56 object-cover rounded-md shadow"
           />
         ) : (
-          <div className="w-28 h-40 rounded-md bg-amber-200 flex items-center justify-center text-4xl shadow">
+          <div className="w-32 h-52 md:w-36 md:h-56 rounded-md bg-amber-200 flex items-center justify-center text-4xl shadow">
             📖
           </div>
         )}
       </div>
 
       {/* Info */}
-      <div className="flex-1 min-w-0">
+      <div className="flex-1 min-w-0 space-y-1">
         {isCurrent && (
           <span className="inline-block text-xs font-semibold uppercase tracking-wider bg-amber-800 text-amber-50 px-2 py-0.5 rounded mb-2">
             Currently Reading
           </span>
         )}
-        <h2 className="text-xl font-bold text-gray-900 leading-tight">{book.title}</h2>
-        <p className="text-gray-500 text-sm mt-0.5">by {book.author}</p>
-        <p className="text-amber-700 text-sm mt-2 font-medium">
+        <h2 className="text-2xl font-bold text-gray-900 leading-tight">{book.title}</h2>
+        <p className="text-gray-500 text-base mt-1">by {book.author}</p>
+        <p className="text-amber-700 text-base mt-3 font-medium">
           {formatDateRange(book.startDate, book.endDate)}
         </p>
 
@@ -91,7 +91,7 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
         )}
 
         {book.description && (
-          <p className="text-gray-600 text-sm mt-3 leading-relaxed line-clamp-3">
+          <p className="text-gray-600 text-base mt-4 leading-relaxed line-clamp-3">
             {book.description}
           </p>
         )}

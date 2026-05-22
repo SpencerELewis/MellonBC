@@ -28,7 +28,7 @@ body {
   align-items: center;
   animation: cover-scroll 30s linear infinite;
   display: flex;
-  gap: 1.25rem;
+  gap: 2rem;
   width: max-content;
 }
 

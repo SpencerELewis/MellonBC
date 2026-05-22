@@ -22,7 +22,9 @@ export default function BooksPage() {
           <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400 mb-3">
             Current Book
           </h2>
-          <BookCard book={currentBook} isCurrent />
+          <div id={currentBook.id} className="scroll-mt-24">
+            <BookCard book={currentBook} isCurrent />
+          </div>
         </section>
       ) : (
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-8 text-center text-amber-700">
@@ -39,7 +41,9 @@ export default function BooksPage() {
           </h2>
           <div className="space-y-4">
             {upcomingBooks.map((b) => (
-              <BookCard key={b.id} book={b} />
+              <div key={b.id} id={b.id} className="scroll-mt-24">
+                <BookCard book={b} />
+              </div>
             ))}
           </div>
         </section>
@@ -52,7 +56,9 @@ export default function BooksPage() {
           </h2>
           <div className="space-y-4">
             {[...pastBooks].reverse().slice(0, 3).map((b) => (
-              <BookCard key={b.id} book={b} />
+              <div key={b.id} id={b.id} className="scroll-mt-24">
+                <BookCard book={b} />
+              </div>
             ))}
           </div>
         </section>

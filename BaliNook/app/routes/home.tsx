@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link } from "react-router";
 import { bookClubData } from "~/data/bookclub-data";
+import { toAssetUrl } from "~/lib/asset-path";
 
 const NEXT_MEETING = {
   date: "May 27, 2026",
@@ -95,7 +96,7 @@ export default function Home() {
                     aria-label={`Open ${book.title} in Books`}
                   >
                     <img
-                      src={book.path}
+                      src={toAssetUrl(book.path)}
                       alt={`Cover of ${book.title}`}
                       className="h-60 w-40 md:h-72 md:w-48 object-cover rounded-md"
                     />

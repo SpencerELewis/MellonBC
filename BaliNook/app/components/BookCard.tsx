@@ -1,4 +1,5 @@
 import type { Book } from "~/lib/types";
+import { toAssetUrl } from "~/lib/asset-path";
 
 interface BookCardProps {
   book: Book;
@@ -45,7 +46,7 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
       <div className="flex-shrink-0">
         {book.path ? (
           <img
-            src={book.path}
+            src={toAssetUrl(book.path)}
             alt={`Cover of ${book.title}`}
             className="w-32 h-52 md:w-36 md:h-56 object-cover rounded-md shadow"
           />
@@ -99,3 +100,5 @@ export function BookCard({ book, isCurrent = false }: BookCardProps) {
     </div>
   );
 }
+
+

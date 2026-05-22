@@ -15,6 +15,10 @@ function dateStr(year: number, month: number, day: number): string {
   return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
 
+function dateToStr(date: Date): string {
+  return dateStr(date.getFullYear(), date.getMonth(), date.getDate());
+}
+
 function getBooksForDate(date: string, books: Book[]): Book[] {
   return books.filter((b) => b.startDate <= date && b.endDate >= date);
 }
@@ -47,7 +51,6 @@ function buildMonthCells(year: number, month: number): Array<{ day: number | nul
 export function Calendar({ books }: CalendarProps) {
   const today = new Date();
   const [year, setYear] = useState(today.getFullYear());
-  const [tooltipDate, setTooltipDate] = useState<string | null>(null);
   const todayStr = dateStr(today.getFullYear(), today.getMonth(), today.getDate());
 
   return (
@@ -73,10 +76,20 @@ export function Calendar({ books }: CalendarProps) {
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
         {MONTHS.map((monthName, monthIdx) => {
           const cells = buildMonthCells(year, monthIdx);
+          const monthStart = dateToStr(new Date(year, monthIdx, 1));
+          const monthEnd = dateToStr(new Date(year, monthIdx + 1, 0));
+          const monthBooks = books.filter((b) => b.startDate <= monthEnd && b.endDate >= monthStart);
 
           return (
             <section key={`${year}-${monthIdx}`} className="rounded-lg border border-gray-200 p-3">
-              <h4 className="text-sm font-semibold text-gray-700 mb-2">{monthName}</h4>
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <h4 className="text-sm font-semibold text-gray-700">{monthName}</h4>
+                {monthBooks.length > 0 && (
+                  <div className="max-w-[70%] rounded border border-gray-300 bg-gray-50 px-2 py-0.5 text-[10px] text-gray-700">
+                    {monthBooks.map((b) => b.title).join(", ")}
+                  </div>
+                )}
+              </div>
 
               <div className="grid grid-cols-7 mb-1">
                 {DAYS.map((d) => (
@@ -102,19 +115,8 @@ export function Calendar({ books }: CalendarProps) {
                         ${hasBook ? getBookColor(dayBooks[0], books) : "text-gray-700"}
                         ${isToday ? "ring-2 ring-amber-600 ring-offset-1 font-bold" : ""}
                       `}
-                      onMouseEnter={() => {
-                        if (hasBook) {
-                          setTooltipDate(ds);
-                        }
-                      }}
-                      onMouseLeave={() => setTooltipDate(null)}
                     >
                       {cell.day}
-                      {tooltipDate === ds && hasBook && (
-                        <div className="absolute z-10 bottom-full left-1/2 -translate-x-1/2 mb-1 bg-gray-900 text-white text-xs rounded px-2 py-1 whitespace-nowrap pointer-events-none shadow-lg">
-                          {dayBooks.map((b) => b.title).join(", ")}
-                        </div>
-                      )}
                     </div>
                   );
                 })}

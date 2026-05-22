@@ -60,9 +60,14 @@ This repo includes a workflow at `.github/workflows/deploy.yml` that deploys the
 ### Steps
 
 1. In GitHub repo settings, enable Pages with source set to `GitHub Actions`.
-2. If your site is hosted at `https://username.github.io/REPO_NAME/`, add repository variable:
-	 - `VITE_BASE_PATH` = `/REPO_NAME/`
-3. Push to `main`.
+2. Push to `main`.
+
+The deploy workflow automatically sets `VITE_BASE_PATH`:
+
+- `/${REPO_NAME}/` for project pages (for example `username.github.io/MellonBC/`)
+- `/` for user/org pages (`username.github.io`)
+
+Optional: add repository variable `VITE_BASE_PATH` to override the auto value.
 
 ### SPA Route Handling
 

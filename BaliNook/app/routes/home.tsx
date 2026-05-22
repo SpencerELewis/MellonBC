@@ -141,7 +141,16 @@ export default function Home() {
 
       <section>
         <h2 className="text-2xl md:text-3xl font-semibold text-amber-900">Famous Quotes</h2>
-        <p className="mt-3 text-lg md:text-xl text-amber-900/70">To be updated...</p>
+        <blockquote className="mt-3 text-lg md:text-xl text-amber-900/80 italic leading-relaxed">
+          {"\"...the woman was an "}
+          <strong>awful</strong>
+          {" person. I know she had "}
+          <strong>cancer</strong>
+          {" and was dying but despite all of his efforts to care for her, it was never good enough.\""}
+        </blockquote>
+        <p className="mt-2 text-sm md:text-base text-amber-900/70">
+        </p>
+        <p className="mt-2 text-base md:text-lg text-amber-900/70 font-medium">- Danny, <em>What Happens at Night</em></p>
       </section>
     </div>
   );

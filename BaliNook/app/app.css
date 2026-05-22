@@ -9,3 +9,39 @@ html,
 body {
   @apply bg-white;
 }
+
+.cover-marquee {
+  overflow: hidden;
+  width: 100%;
+}
+
+.cover-marquee-bleed {
+  left: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  position: relative;
+  right: 50%;
+  width: 100vw;
+}
+
+.cover-marquee-track {
+  align-items: center;
+  animation: cover-scroll 30s linear infinite;
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+}
+
+.cover-marquee:hover .cover-marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes cover-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-1 * var(--marquee-shift, 8.333%)));
+  }
+}

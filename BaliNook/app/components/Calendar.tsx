@@ -86,7 +86,7 @@ export function Calendar({ books }: CalendarProps) {
               key={`${year}-${monthIdx}`}
               className={`rounded-lg border p-3 ${
                 isCurrentMonth
-                  ? "border-emerald-500 ring-2 ring-emerald-300 bg-emerald-50/60"
+                  ? "border-emerald-100 bg-emerald-50/60"
                   : "border-emerald-100"
               }`}
             >
@@ -123,7 +123,7 @@ export function Calendar({ books }: CalendarProps) {
                       key={ds}
                       className={`relative h-6 text-center rounded-md text-xs leading-6 cursor-default
                         ${hasBook ? getBookColor(dayBooks[0], books) : "text-gray-700"}
-                        ${isToday ? "ring-2 ring-emerald-700 ring-offset-1 font-bold" : ""}
+                        ${isToday ? "bg-emerald-700 text-white font-bold" : ""}
                       `}
                     >
                       {cell.day}

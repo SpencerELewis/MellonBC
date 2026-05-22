@@ -4,6 +4,7 @@ export function Nav() {
   const location = useLocation();
   const isBooks = location.pathname.startsWith("/books");
   const isCalendar = location.pathname.startsWith("/calendar");
+
   const navThemeClass = isBooks
     ? "bg-sky-300"
     : isCalendar

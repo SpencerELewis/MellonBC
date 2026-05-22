@@ -5,10 +5,12 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "react-router";
 
 import type { Route } from "./+types/root";
 import { Nav } from "./components/Nav";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -55,11 +57,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
+  const location = useLocation();
+  const isLoginPage = location.pathname === "/login";
+  const isAuthenticated = sessionStorage.getItem("balinook_auth") === "verified";
+
   return (
-    <>
-      <Nav />
+    <ProtectedRoute>
+      {!isLoginPage && <Nav />}
       <Outlet />
-    </>
+    </ProtectedRoute>
   );
 }
 

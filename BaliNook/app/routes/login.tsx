@@ -11,6 +11,7 @@ export function meta() {
 export default function LoginPage() {
   const navigate = useNavigate();
   const [password, setPassword] = useState("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,16 +63,27 @@ export default function LoginPage() {
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
-              <input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                disabled={isLoading}
-                placeholder="Enter password"
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-                autoComplete="current-password"
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  type={isPasswordVisible ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  disabled={isLoading}
+                  placeholder="Enter password"
+                  className="w-full px-4 py-2 pr-16 rounded-lg border border-gray-300 focus:ring-2 focus:ring-gray-500 focus:border-transparent outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  onClick={() => setIsPasswordVisible((v) => !v)}
+                  disabled={isLoading}
+                  aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+                  className="absolute inset-y-0 right-2 my-1 px-2 rounded-md text-xs font-semibold text-gray-600 hover:text-gray-900 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                >
+                  {isPasswordVisible ? "Hide" : "Show"}
+                </button>
+              </div>
             </div>
 
             {error && (

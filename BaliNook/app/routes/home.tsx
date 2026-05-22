@@ -71,36 +71,42 @@ export default function Home() {
         </p>
       </section>
 
+      <hr className="border-gray-200" />
+
       {covers.length > 0 && (
-        <section>
-          <div
-            className="cover-marquee cover-marquee-bleed"
-            aria-label="Scrolling book covers"
-            onMouseEnter={() => tweenTrackRate(0)}
-            onMouseLeave={() => tweenTrackRate(1)}
-          >
+        <>
+          <section>
             <div
-              ref={marqueeTrackRef}
-              className="cover-marquee-track"
-              style={{ "--marquee-shift": `${100 / MARQUEE_REPEAT}%` } as React.CSSProperties}
+              className="cover-marquee cover-marquee-bleed"
+              aria-label="Scrolling book covers"
+              onMouseEnter={() => tweenTrackRate(0)}
+              onMouseLeave={() => tweenTrackRate(1)}
             >
-              {marqueeCovers.map((book, index) => (
-                <Link
-                  key={`${book.id}-${index}`}
-                  to={`/books#${book.id}`}
-                  className="block relative transition-transform duration-300 ease-out hover:scale-110 focus-visible:scale-110 focus-visible:outline-none"
-                  aria-label={`Open ${book.title} in Books`}
-                >
-                  <img
-                    src={book.path}
-                    alt={`Cover of ${book.title}`}
-                    className="h-60 w-40 md:h-72 md:w-48 object-cover rounded-md"
-                  />
-                </Link>
-              ))}
+              <div
+                ref={marqueeTrackRef}
+                className="cover-marquee-track"
+                style={{ "--marquee-shift": `${100 / MARQUEE_REPEAT}%` } as React.CSSProperties}
+              >
+                {marqueeCovers.map((book, index) => (
+                  <Link
+                    key={`${book.id}-${index}`}
+                    to={`/books#${book.id}`}
+                    className="block relative transition-transform duration-300 ease-out hover:scale-110 focus-visible:scale-110 focus-visible:outline-none"
+                    aria-label={`Open ${book.title} in Books`}
+                  >
+                    <img
+                      src={book.path}
+                      alt={`Cover of ${book.title}`}
+                      className="h-60 w-40 md:h-72 md:w-48 object-cover rounded-md"
+                    />
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+
+          <hr className="border-gray-200" />
+        </>
       )}
 
       <section>
@@ -119,6 +125,13 @@ export default function Home() {
             Browse Books
           </Link>
         </div>
+      </section>
+
+      <hr className="border-gray-200" />
+
+      <section>
+        <h2 className="text-2xl md:text-3xl font-semibold text-gray-900">Famous Quotes</h2>
+        <p className="mt-3 text-lg md:text-xl text-gray-600">To be updated...</p>
       </section>
     </div>
   );

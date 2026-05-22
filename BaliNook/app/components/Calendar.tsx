@@ -58,7 +58,7 @@ export function Calendar({ books }: CalendarProps) {
       <div className="flex items-center justify-between mb-4">
         <button
           onClick={() => setYear((y) => y - 1)}
-          className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
+          className="h-10 w-10 text-2xl leading-none rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
           aria-label="Previous year"
         >
           ‹
@@ -66,7 +66,7 @@ export function Calendar({ books }: CalendarProps) {
         <h3 className="font-semibold text-gray-800">Reading Year: {year}</h3>
         <button
           onClick={() => setYear((y) => y + 1)}
-          className="p-1.5 rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
+          className="h-10 w-10 text-2xl leading-none rounded-lg hover:bg-gray-100 text-gray-600 hover:text-gray-900 transition-colors"
           aria-label="Next year"
         >
           ›

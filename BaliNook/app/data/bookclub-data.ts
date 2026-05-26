@@ -34,5 +34,14 @@ export const bookClubData: BookClubData = {
       endDate: "2026-05-31",
       description: "A book about Matthew McConaughey's existential crises that he turned into a guide to life.",
     },
+    {
+      id: "red-rising-june",
+      title: "Red Rising",
+      author: "Pierce Brown",
+      path: "/images/covers/RedRising.jpg",
+      startDate: "2026-06-01",
+      endDate: "2026-06-30",
+      description: "A rebellion story on Mars with a ruthless edge.",
+    },
   ],
 };

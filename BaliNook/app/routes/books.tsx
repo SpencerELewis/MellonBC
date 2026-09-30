@@ -15,9 +15,10 @@ export default function BooksPage() {
   const [highlightedBookId, setHighlightedBookId] = useState<string | null>(null);
   const data = bookClubData;
   const today = new Date().toISOString().slice(0, 10);
-  const currentBook = data.books.find((b) => b.id === data.currentBookId) ?? null;
-  const upcomingBooks = data.books.filter((b) => b.id !== data.currentBookId && b.startDate > today);
-  const pastBooks = data.books.filter((b) => b.id !== data.currentBookId && b.endDate < today);
+  const currentMonth = new Date().getMonth() + 1;
+  const currentBook = data.books.find((book) => Number(book.startDate.slice(5, 7)) === currentMonth) ?? null;
+  const upcomingBooks = data.books.filter((book) => book.id !== currentBook?.id && book.startDate > today);
+  const pastBooks = data.books.filter((book) => book.id !== currentBook?.id && book.endDate < today);
 
   useEffect(() => {
     const hashId = decodeURIComponent(location.hash.replace("#", ""));
@@ -53,7 +54,6 @@ export default function BooksPage() {
         <div className="bg-sky-100 border border-sky-200 rounded-xl p-8 text-center text-sky-800">
           <p className="text-4xl mb-3">📚</p>
           <p className="font-semibold">No current book selected</p>
-          <p className="text-sm mt-1">Set currentBookId in app/data/bookclub-data.ts.</p>
         </div>
       )}
 

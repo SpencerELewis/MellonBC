@@ -2,10 +2,8 @@ import type { BookClubData } from "~/lib/types";
 
 // Update this file to change all book club content.
 // 1) Edit books[] entries
-// 2) Set currentBookId to one of the book ids below
-// 3) Place cover images in public/images/covers and use: /images/covers/<file-name>
+// 2) Place cover images in public/images/covers and use: /images/covers/<file-name>
 export const bookClubData: BookClubData = {
-  currentBookId: "never-lie-september",
   books: [
     {
       id: "what-happens-at-night-march",

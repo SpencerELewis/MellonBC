@@ -9,6 +9,5 @@ export interface Book {
 }
 
 export interface BookClubData {
-  currentBookId: string | null;
   books: Book[];
 }

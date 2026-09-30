@@ -70,5 +70,14 @@ export const bookClubData: BookClubData = {
       endDate: "2026-09-30",
       description: "Poor house-hunting simulator 2022.",
     },
+        {
+      id: "crime-and-punishment-october",
+      title: "Crime and Punishment",
+      author: "Fyodor Dostoevsky",
+      path: "/images/covers/CrimeAndPunishment.jpg",
+      startDate: "2026-10-01",
+      endDate: "2026-10-31",
+      description: "Pawnbrokers HATE this one trick!",
+    },
   ],
 };

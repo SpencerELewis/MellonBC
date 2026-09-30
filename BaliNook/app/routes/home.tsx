@@ -4,10 +4,10 @@ import { bookClubData } from "~/data/bookclub-data";
 import { toAssetUrl } from "~/lib/asset-path";
 
 const NEXT_MEETING = {
-  date: "May 27, 2026",
+  date: "September 30, 2026",
   time: "6:00 PM",
-  location: "The Post on the corner of 20th and M St",
-  agenda: "Discuss Greenlights",
+  location: "Starlite Lounge",
+  agenda: "Never Lie by Freida McFadden",
 };
 
 export function meta() {
@@ -135,22 +135,6 @@ export default function Home() {
             Browse Books
           </Link>
         </div>
-      </section>
-
-      <hr className="border-amber-200" />
-
-      <section>
-        <h2 className="text-2xl md:text-3xl font-semibold text-amber-900">Famous Quotes</h2>
-        <blockquote className="mt-3 text-lg md:text-xl text-amber-900/80 italic leading-relaxed">
-          {"\"...the woman was an "}
-          <strong>awful</strong>
-          {" person. I know she had "}
-          <strong>cancer</strong>
-          {" and was dying but despite all of his efforts to care for her, it was never good enough.\""}
-        </blockquote>
-        <p className="mt-2 text-sm md:text-base text-amber-900/70">
-        </p>
-        <p className="mt-2 text-base md:text-lg text-amber-900/70 font-medium">- Danny, <em>What Happens at Night</em></p>
       </section>
     </div>
   );

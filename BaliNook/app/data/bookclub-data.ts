@@ -5,7 +5,7 @@ import type { BookClubData } from "~/lib/types";
 // 2) Set currentBookId to one of the book ids below
 // 3) Place cover images in public/images/covers and use: /images/covers/<file-name>
 export const bookClubData: BookClubData = {
-  currentBookId: "greenlights-may",
+  currentBookId: "never-lie-september",
   books: [
     {
       id: "what-happens-at-night-march",
@@ -41,7 +41,34 @@ export const bookClubData: BookClubData = {
       path: "/images/covers/RedRising.jpg",
       startDate: "2026-06-01",
       endDate: "2026-06-30",
-      description: "A rebellion story on Mars with a ruthless edge.",
+      description: "A highschool story of a rebellion on Mars.",
+    },
+    {
+      id: "the-stranger-july",
+      title: "The Stranger",
+      author: "Albert Camus",
+      path: "/images/covers/TheStranger.jpg",
+      startDate: "2026-07-01",
+      endDate: "2026-07-31",
+      description: "Beach murder is bad.",
+    },
+    {
+      id: "the-revival-august",
+      title: "The Revival",
+      author: "Stephen King",
+      path: "/images/covers/TheRevival.jpg",
+      startDate: "2026-08-01",
+      endDate: "2026-08-31",
+      description: "Don't do heroin, or you'll find lovecraftian horrors.",
+    },
+    {
+      id: "never-lie-september",
+      title: "Never Lie",
+      author: "Freida McFadden",
+      path: "/images/covers/NeverLie.jpg",
+      startDate: "2026-09-01",
+      endDate: "2026-09-30",
+      description: "Poor house-hunting simulator 2022.",
     },
   ],
 };

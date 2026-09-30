@@ -78,7 +78,7 @@ export default function BooksPage() {
             History
           </h2>
           <div className="space-y-4">
-            {[...pastBooks].reverse().slice(0, 3).map((b) => (
+            {[...pastBooks].reverse().slice().map((b) => (
               <div key={b.id} id={b.id} className={getCardAnchorClass(b.id)}>
                 <BookCard book={b} />
               </div>
